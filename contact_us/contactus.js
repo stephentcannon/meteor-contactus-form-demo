@@ -3,7 +3,7 @@ if (Meteor.is_server) {
   // but it requires you to write a Meteor.method that can be called from the client with Meteor.call
   // way easier than having to wire up RESTful framework and boilerplate
   Meteor.startup(function () {
-    _.each(['ContactUsFormPosts'], function(collection) {
+    _.each(['ContactUs'], function(collection) {
       _.each(['insert', 'update', 'remove'], function(method) {
         Meteor.default_server.method_handlers['/' + collection + '/' + method] = function() {};
       });
