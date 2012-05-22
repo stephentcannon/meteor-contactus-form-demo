@@ -25,6 +25,7 @@ Run:
     cd meteor-contactus-form-demo
     cd contactus
     edit contactus.js and change configuration settings for email support
+    cd ..
     meteor 
 
 License
