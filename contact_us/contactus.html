@@ -1,0 +1,57 @@
+<template name="contactus">  
+  <div class="modal hide fade" id="contactUsDialog">
+    <div class="modal-header">
+      <a href="#" class="close" data-dismiss="modal">&times;</a>
+      <h1>Contact Us</h1>
+    </div>
+    <div class="modal-body">
+      <div id="alert-contact" class="alert hide fade in">
+        <a class="close" href="#">×</a>
+        <strong><span id="alert-title-contact"></span></strong> <span id="alert-message-contact"></span>
+      </div>
+      <form class"form-horizontal" id="contact-form">
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="name">Please enter your name.</label>
+            <div class="controls">
+              <input type="text" class="input-xlarge" id="name" name="name" maxlength="100" autofocus>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="email">Please enter your email.</label>
+            <div class="controls">
+              <input type="text" class="input-xlarge" id="email" name="email" maxlength="100">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="subject">Please select a subject.</label>
+            <div class="controls">
+              <select id="leSubject" name="subject">
+                <option>Compliment</option>
+                <option>Comment</option>
+                <option>Complaint</option>
+                <option>Suggestion</option>
+                <option>Bug</option>
+                <option>Issue</option>
+              </select>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="comments">Please enter comments.</label>
+            <div class="controls">
+              <textarea class="input-xlarge" id="comments" name="comments" rows="3"></textarea>
+              <p class="help-block"></p>
+            </div>
+          </div>
+          <div id="buttons-contact" class="form-actions">
+            <button id="btnContact" name="btnContact" type="button" class="btn btn-primary">submit</button>
+            <button type="reset" class="btn">reset</button>
+          </div>
+          <div id="progress-contact" class="progress progress-striped active hide">
+            <div id="bar-contact" class="bar" style="width: 33%;"></div>
+          </div> 
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</template>
