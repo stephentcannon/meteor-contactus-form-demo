@@ -28,6 +28,10 @@ Run:
     cd ..
     meteor 
 
+Important Points:
+    Make sure autopublish is turned off.
+        meteor remove autopublish
+
 License
 ------------
 MIT
