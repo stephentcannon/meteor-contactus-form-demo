@@ -1,4 +1,5 @@
 # you can .git/info/exclude this as well
 config.js
+config-contactus.js
 TODO.md
 start.sh
