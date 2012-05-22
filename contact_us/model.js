@@ -1,7 +1,6 @@
 ContactUs = new Meteor.Collection("ContactUs");
 
 ContactUs.validateParams = function(params) {
-  console.log('*** validateParams ***');
     for (var key in params) {
       value = params[key];
       if(_.isEmpty(value) || _.isUndefined(value) || 
@@ -12,7 +11,6 @@ ContactUs.validateParams = function(params) {
   };
 
 ContactUs.validateEmail = function(email) { 
-  console.log('*** validateEmail ***');
   // use either of these
   //   /^([a-zA-Z0-9_.-\+])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/
   //   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\  ".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA  -Z\-0-9]+\.)+[a-zA-Z]{2,}))$/  

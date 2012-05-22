@@ -57,7 +57,6 @@ if (Meteor.is_server) {
   });
 
   function sendEmail(subject, body, htmlbody, to, from, bcc){
-    console.log('*** sendEmail ***');
     var mailOptions = {
         from: from,
         to: to,
@@ -68,10 +67,10 @@ if (Meteor.is_server) {
     smtpTransport.sendMail(mailOptions 
       ,function(error, response){
         if(error){
-          console.log(error);
+          //console.log(error);
         }else{
-          console.log("Message sent: " + response.message);
-          console.log("To: " + to);
+          //console.log("Message sent: " + response.message);
+          //console.log("To: " + to);
         }
         // if you don't want to use this transport object anymore, uncomment following line
         //smtpTransport.close(); // shut down the connection pool, no more messages
@@ -80,13 +79,13 @@ if (Meteor.is_server) {
   }
 
   Meteor.methods({
-    insertContactUs: insertContactUs,
-    sendEmaill: sendEmail
+    insertContactUs: insertContactUs
   });
 
   function insertContactUs(params){
-    console.log('*** insertContactUs ***');
-    //this.unblock();
+    // this.unblock() may not be needed bcuz using insert with a callback 
+    // was not returning a result to the client for some reason
+    this.unblock();
     if(params){
       ContactUs.validateParams(params);
       ContactUs.validateEmail(params.email);
@@ -99,29 +98,27 @@ if (Meteor.is_server) {
       subject: params.subject.slice(0,30),
       comments: params.comments.slice(0,1000)
       });
-      //TODO process with callback
       if(id){
-        sendEmail('Thank you for contacting us', 
-          'Thank you for contacting us.  We will review your request and get back to you if necessary. Subject type:\n'+params.subject+'\nComments:\n'+params.comments+'\n\nThanks,\nCustomer Service',
-          '<html><h1>Thank you for contacting us.</h1><p>We will review your comments and get back to you if necessary.</p><p>Subject: '+params.subject+'</p><p>Comments:</p>'+params.comments+'<p>Thanks,<br/>The Customer Service</p></html>',
+        sendEmail('Thank you for using the Meteor Contact Us demo!', 
+          'Thank you for using the Meteor Contact Us demo!  Here is the data you submitted. Subject type:\n'+params.subject+'\nComments:\n'+params.comments+'\n\nThanks,\nCustomer Service',
+          '<html><h1>Thank you for using the Meteor Contact Us demo!</h1><p>Here is the data you submitted.</p><p>Subject: '+params.subject+'</p><p>Comments:</p>'+params.comments+'<p>Thanks,<br/>The Customer Service</p></html>',
           params.name+'<'+params.email+'>',
           config.email_from
         );
-        sendEmail('Contact Form Submission: ' + params.subject,
+        sendEmail('Demo Contact Form Submission: ' + params.subject,
           'Comments\n' + params.comments,
           '<html><p>From: '+params.name+'<'+params.email+'></p><p>Subject: '+params.subject+'</p><p>Comments:</p>'+params.comments+'</html>',
           config.email_to,
           params.name+'<'+params.email+'>'
         );
-        return result = 'Thank you kindly!';
+        return 'Thank you kindly!';
       } else {
         throw new Meteor.Error(500, 'Zoinkies! Internal Server Error. Failed to insert "contact us" request. Please retry.');
-      }
+      }  
     } else {
       throw new Meteor.Error(500, 'Zoinkies! Internal Server Error. Missing params.');
     }
   }
-
 }
 
 if (Meteor.is_client) {
@@ -144,8 +141,6 @@ if (Meteor.is_client) {
           $('#progress-contact').fadeIn(1000, function(){
            $('#bar-contact').width('66%');
            Meteor.call('insertContactUs', params, function (error, result) { 
-            console.log('error: ' + error);
-            console.log('result: ' + result);
               if(result){
                 $('#bar-contact').width('100%');
                 $('#progress-contact').fadeOut(1000, function(){
@@ -153,7 +148,7 @@ if (Meteor.is_client) {
                   $('#contact-form').fadeOut(2000, function(){
                     $('#buttons-contact').show();
                   });
-                  Alert.setAlert('awesome!', result, 'alert-success', 'contact');
+                  Alert.setAlert('Awesome!', result, 'alert-success', 'contact');
                   $('#contactUsDialog').fadeOut(3000, function(){
                     $('#contactUsDialog').modal('hide');
                     $('#contact-form').show();
@@ -163,7 +158,6 @@ if (Meteor.is_client) {
               } else {
                 $('#progress-contact').fadeOut(1000, function(){
                   $('#bar-contact').width('33%');
-                  console.log('error: ' + error);
                   if(error){
                     Alert.setAlert('Error', error + error.reason, 'alert-error', 'contact');  
                   } else {
@@ -179,10 +173,6 @@ if (Meteor.is_client) {
         Alert.setAlert('Error', error.reason, 'alert-error', 'contact');
       }
     }
-  }
-  //function insertContactUs(){
-    //client side stub can be used for side effect processing
-    //console.log('insertContactUs client stub');
-  //}
+  };
 }
 
