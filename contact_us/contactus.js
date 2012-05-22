@@ -99,9 +99,9 @@ if (Meteor.is_server) {
       comments: params.comments.slice(0,1000)
       });
       if(id){
-        sendEmail('Thank you for using the Meteor Contact Us demo!', 
-          'Thank you for using the Meteor Contact Us demo!  Here is the data you submitted. Subject type:\n'+params.subject+'\nComments:\n'+params.comments+'\n\nThanks,\nCustomer Service',
-          '<html><h1>Thank you for using the Meteor Contact Us demo!</h1><p>Here is the data you submitted.</p><p>Subject: '+params.subject+'</p><p>Comments:</p>'+params.comments+'<p>Thanks,<br/>The Customer Service</p></html>',
+        sendEmail('Thank you for using the Contact Us demo!', 
+          'Thank you for using the Contact Us demo!  Here is the data you submitted. Subject type:\n'+params.subject+'\nComments:\n'+params.comments+'\n\nThanks,\nCustomer Service',
+          '<html><h1>Thank you for using the Contact Us demo!</h1><p>Here is the data you submitted.</p><p>Subject: '+params.subject+'</p><p>Comments:</p>'+params.comments+'<p>Thanks,<br/>The Customer Service</p></html>',
           params.name+'<'+params.email+'>',
           config.email_from
         );
@@ -137,33 +137,33 @@ if (Meteor.is_client) {
       try{
         ContactUs.validateParams(params);
         ContactUs.validateEmail(params.email);
-        $('#buttons-contact').fadeOut(1000, function(){
-          $('#progress-contact').fadeIn(1000, function(){
+        $('#buttons-contact').fadeOut(1000, 'linear', function(){
+          $('#progress-contact').fadeIn(1000, 'linear', function(){
            $('#bar-contact').width('66%');
            Meteor.call('insertContactUs', params, function (error, result) { 
               if(result){
                 $('#bar-contact').width('100%');
-                $('#progress-contact').fadeOut(1000, function(){
+                $('#progress-contact').fadeOut(1000, 'linear', function(){
                   $('#bar-contact').width('33%');
-                  $('#contact-form').fadeOut(2000, function(){
+                  $('#contact-form').fadeOut(2000, 'linear', function(){
                     $('#buttons-contact').show();
                   });
                   Alert.setAlert('Awesome!', result, 'alert-success', 'contact');
-                  $('#contactUsDialog').fadeOut(3000, function(){
+                  $('#contactUsDialog').fadeOut(3000, 'linear', function(){
                     $('#contactUsDialog').modal('hide');
                     $('#contact-form').show();
                     $("#contact-form").reset();
                   }) 
                 });
               } else {
-                $('#progress-contact').fadeOut(1000, function(){
+                $('#progress-contact').fadeOut(1000, 'linear', function(){
                   $('#bar-contact').width('33%');
                   if(error){
                     Alert.setAlert('Error', error + error.reason, 'alert-error', 'contact');  
                   } else {
                     Alert.setAlert('Error', 'Unknown Error', 'alert-error', 'contact');
                   }
-                  $('#buttons-contact').fadeIn(1000);
+                  $('#buttons-contact').fadeIn(1000, 'linear');
                 });
               }
            });
