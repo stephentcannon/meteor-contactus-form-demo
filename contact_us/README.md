@@ -17,25 +17,15 @@ Install Meteor:
 
 Then you can clone the code onto your system:
 
-    git clone git://github.com/stephentcannon/contactus.git
+    git clone stephentcannon/meteor-contactus-form-demo.git
 
-Run or deploy:
+Run:
     
     To run
-    cd contactus
+    cd meteor-contactus-form-demo
     cd contactus
     edit contactus.js and change configuration settings for email support
     meteor 
-
-    To deploy
-    cd contactus
-    meteor deploy [yourlocation].meteor.com
-
-Reset data:
-  
-  To reset all data
-  cd constactus
-  meteor reset
 
 License
 ------------
