@@ -17,7 +17,7 @@
         I am a javascript noob. I started javascript programming when Meteor launched. The first difficulty I encountered was figuring out how to get data into Meteor and the underlying mongodb. I kept approaching it from the traditional back end server side programming point of view. I really had to stretch my head and think inside out, upside down and every which way but loose!  Left turn Clyde!
       </div>
       <div class="well"> 
-        This may not be the most efficient or effective way to accomplish form or data processing. I am sure the code base could use quite a bit of improvement. Remember you should always turn off autopublish unless you absolutely need it.  It is so freakin' easy to setup publications and subscribe to them and wire up your own autosubscriptions there seems to be no excuse for leaving it turned on.
+        This may not be the most efficient or effective way to accomplish form or data processing. I am sure the code base could use quite a bit of improvement. Remember you should always turn off autopublish unless you absolutely need it.  It is so freakin' easy to setup publications and subscribe to them and wire up your own autosubscriptions there seems to be no excuse for leaving it turned on.  Also, I noticed that if you don't put your files in /server/ and /client/ and instead rely on Meteor.is_server to secure the server code it does not work.  Put your server side code in a /server/ directory to safeguard it.  I had to rework this entire project because I noticed code that wasn't in a /server/ directory and was only surrounded by Meteor.is_server was getting pushed to the client browser.
       </div>
     </div>
   </div>
