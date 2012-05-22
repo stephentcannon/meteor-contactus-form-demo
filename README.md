@@ -17,7 +17,7 @@ Install Meteor:
 
 Then you can clone the code onto your system:
 
-    git clone stephentcannon/meteor-contactus-form-demo.git
+    git clone git@github.com:stephentcannon/meteor-contactus-form-demo.git
 
 Run:
     
